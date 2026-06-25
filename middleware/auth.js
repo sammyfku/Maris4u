@@ -1,26 +1,21 @@
-// Simple auth middleware that reads an Authorization: Bearer <userId> header for demo purposes.
-// In a real app use JWTs or sessions.
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
-const fs = require('fs');
-const path = require('path');
-
-function loadUsers() {
-  const p = path.join(__dirname, '..', 'data', 'users.json');
-  try {
-    const raw = fs.readFileSync(p, 'utf8');
-    return JSON.parse(raw || '[]');
-  } catch (e) { return []; }
-}
-
-module.exports = function requireAuth(req, res, next) {
-  const auth = req.get('Authorization') || '';
-  const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
-  if (!token) return res.status(401).json({ error: 'Missing token' });
-
-  const users = loadUsers();
-  const user = users.find(u => u.id === token);
-  if (!user) return res.status(401).json({ error: 'Invalid token' });
-
-  req.user = { id: user.id, email: user.email, isAdmin: !!user.isAdmin };
-  next();
+// Protects routes - User must be logged in
+const protect = async (req, res, next) => {
+  let token;
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    try {
+      token = req.headers.authorization.split(' ')[1];
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = await User.findById(decoded.id).select('-password');
+      next();
+    } catch (error) {
+      res.status(401).json({ message: 'Not authorized, token failed' });
+    }
+  } else {
+    res.status(401).json({ message: 'Not authorized, no token' });
+  }
 };
+
+module.exports = { protect };

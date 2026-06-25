@@ -1,5 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0f;
+  color: #e4e4e7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Modern Dark Card */
+.dark-card {
+  @apply bg-surface rounded-2xl border border-white/5 shadow-xl 
+         hover:border-accent-cyan/30 hover:shadow-[0_0_30px_rgba(0,212,255,0.1)] 
+         transition-all duration-300;
+}
+
+/* Modern Button */
+.modern-btn {
+  @apply bg-gradient-to-r from-accent-cyan to-blue-600 text-white font-semibold 
+         py-3 px-6 rounded-xl shadow-lg hover:shadow-[0_0_25px_rgba(0,212,255,0.4)]
+         hover:scale-[1.02] active:scale-[0.98] transition-all duration-200;
+}
+
+.modern-btn-outline {
+  @apply border border-white/20 text-white font-semibold py-3 px-6 rounded-xl
+         hover:bg-white/5 hover:border-accent-cyan/50 transition-all duration-200;
+}
+
+/* Modern Input */
+.modern-input {
+  @apply w-full px-4 py-3 rounded-xl bg-dark-700 border border-white/10 
+         text-white placeholder-gray-500 focus:border-accent-cyan focus:outline-none
+         focus:ring-2 focus:ring-accent-cyan/20 transition-all duration-200;
+}
+
+/* Glass Effect */
+.glass {
+  @apply bg-dark-800/80 backdrop-blur-xl border-b border-white/5;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #2e2e3c;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3e3e4c;
+}
+
+/* Mobile Bottom Nav */
+.bottom-nav {
+  @apply fixed bottom-0 left-0 right-0 bg-dark-800/95 backdrop-blur-xl 
+         border-t border-white/10 z-50 md:hidden;
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply bg-gradient-to-r from-accent-cyan via-blue-400 to-accent-purple bg-clip-text text-transparent;
+}
+
+/* Glow Border */
+.glow-border {
+  @apply relative;
+}
+.glow-border::before {
+  content: '';
+  @apply absolute inset-0 rounded-2xl bg-gradient-to-r from-accent-cyan to-accent-purple opacity-0 
+         transition-opacity duration-300 -z-10 blur-xl;
+}
+.glow-border:hover::before {
+  @apply opacity-50;
+  }

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "prod-001",
+    "name": "Neko Plushie",
+    "price": 19.99,
+    "description": "Cute neko plush toy",
+    "image": "/images/neko-plush.jpg",
+    "stock": 25
+  },
+  {
+    "id": "prod-002",
+    "name": "Anime T-Shirt",
+    "price": 24.99,
+    "description": "High-quality cotton shirt",
+    "image": "/images/anime-shirt.jpg",
+    "stock": 40
+  }
+]

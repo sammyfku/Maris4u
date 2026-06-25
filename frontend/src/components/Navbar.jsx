@@ -3,6 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FiShoppingCart, FiHeart, FiUser, FiSearch, FiMenu, FiX, FiHome, FiGrid } from 'react-icons/fi';
 import { useAuthStore } from '../store/authStore';
 import { useCartStore } from '../store/cartStore';
+import Logo from '../components/Logo';
+
+<Link to="/" className="group">
+  <Logo className="h-10" />
+</Link>
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);

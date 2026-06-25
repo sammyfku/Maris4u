@@ -1,41 +1,39 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import Shop from './pages/Shop';
-import ProductDetail from './pages/ProductDetail';
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Profile from './pages/Profile';
-import Admin from './pages/Admin';
-import About from './pages/About';
-import Contact from './pages/Contact';
+// ... all page imports
 
-function App(){
+export default function App() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <BrowserRouter>
+      <Toaster 
+        position="top-center" 
+        toastOptions={{
+          style: {
+            background: '#1e1e2e',
+            color: '#fff',
+            border: '1px solid rgba(255,255,255,0.1)',
+          },
+        }}
+      />
       <Navbar />
-      <main className="flex-1">
+      <main className="min-h-screen">
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/shop" element={<Shop/>} />
-          <Route path="/product/:id" element={<ProductDetail/>} />
-          <Route path="/cart" element={<Cart/>} />
-          <Route path="/checkout" element={<Checkout/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/admin" element={<Admin/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/contact" element={<Contact/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/product/:slug" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
-
-export default App;
